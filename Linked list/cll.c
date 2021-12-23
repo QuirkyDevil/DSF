@@ -33,15 +33,14 @@ int main()
         printf("---- Utils stuff ----\n");
         printf("1.Insertion\n");
         printf("2.Deletion\n");
-        printf("3.Insertion at beginning\n");
-        printf("4.Deletion at beginning\n");
-        printf("5.Insertion at specific Place\n");
-        printf("6.Deletion at specific Place\n\n");
+        printf("3.Deletion at beginning\n");
+        printf("4.Insertion at specific Place\n");
+        printf("5.Deletion at specific Place\n\n");
 
         printf("---- Display stuff ----\n");
-        printf("7.Display\n");
-        printf("8.Length\n");
-        printf("9.Exit\n");
+        printf("6.Display\n");
+        printf("7.Length\n");
+        printf("8.Exit\n");
 
         printf("==========\n");
         printf("Enter a choice: ");
@@ -56,23 +55,20 @@ int main()
             deletion();
             break;
         case 3:
-            insertion_beginning();
+            printf("Session Ended!");
             break;
         case 4:
-            printf("Session Ended!");
-            break;
-        case 5:
             add_after();
             break;
-        case 6:
+        case 5:
             printf("Session Ended!");
-        case 7:
+        case 6:
             display();
             break;
-        case 8:
+        case 7:
             length();
             break;
-        case 9:
+        case 8:
             printf("Session Ended!");
             exit(1);
         default:
