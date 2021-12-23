@@ -81,21 +81,25 @@ int main()
     }
     return 0;
 }
-void append(){
+void append()
+{
     struct node *temp;
     temp = (struct node *)malloc(sizeof(struct node));
 
     printf("Enter data: ");
     scanf("%d", &temp->data);
 
-    if(head == NULL){
+    if (head == NULL)
+    {
         head = temp;
         temp->next = head;
     }
-    else{
+    else
+    {
         struct node *p;
         p = head;
-        while(p->next != head){
+        while (p->next != head)
+        {
             p = p->next;
         }
         p->next = temp;
@@ -103,14 +107,17 @@ void append(){
     }
 }
 
-void deletion(){
-    struct node *temp = head->next;
-    while(temp->next != head){
+void deletion()
+{
+    struct node *temp;
+    temp = head->next;
+    while (temp->next != head)
+    {
         temp = temp->next;
     }
     temp->next = head->next;
     free(head);
-    head = temp;
+    head = temp->next;
 }
 
 void insertion_beginning()
@@ -119,16 +126,19 @@ void insertion_beginning()
     temp = (struct node *)malloc(sizeof(struct node));
     printf("==========\n");
     printf("Enter data: ");
-    scanf("%d", &temp->data);   
+    scanf("%d", &temp->data);
 
-    if(head == NULL){
+    if (head == NULL)
+    {
         temp = head;
         temp->next = head;
     }
-    else{
+    else
+    {
         struct node *p;
         p = head;
-        while(p->next != head){
+        while (p->next != head)
+        {
             p = p->next;
         }
         temp->next = head;
@@ -138,19 +148,23 @@ void insertion_beginning()
     printf("==========\n");
 }
 
-void add_after(){
+void add_after()
+{
     struct node *temp, *p;
-    int location, i= 1;
+    int location, i = 1;
     int len = length();
     printf("Enter Location: ");
     scanf("%d", &location);
 
-    if(location > len){
+    if (location > len)
+    {
         printf("Location is out of bounds");
     }
-    else{
+    else
+    {
         p = head;
-        while(i < location){
+        while (i < location)
+        {
             p = p->next;
             i++;
         }
@@ -161,36 +175,41 @@ void add_after(){
         temp->next = p->next;
         p->next = temp;
     }
-
 }
 
-void display(){
+void display()
+{
     struct node *temp;
     int a = 1;
     temp = head;
-    if(temp == NULL){
+    if (temp == NULL)
+    {
         printf("empty Brb");
     }
-    else{
+    else
+    {
         printf("================\n");
-        while (temp->next != head){
-            printf("Element at pos %d is %d\n",a, temp->data);
+        while (temp->next != head)
+        {
+            printf("%d\n", temp->data);
             temp = temp->next;
             a++;
         }
-        printf("Element at pos %d is %d\n", a, temp->data);
+        printf("%d\n", temp->data);
         printf("================\n");
     }
 }
 
-int length(){
+int length()
+{
     struct node *temp;
     temp = head;
     int a = 0;
-    do{
+    do
+    {
         a++;
         temp = temp->next;
-    }while(temp != head);
+    } while (temp != head);
     printf("Length of Circular Linked list is %d\n", a);
     return a;
 }
