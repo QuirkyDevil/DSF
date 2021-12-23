@@ -3,16 +3,18 @@
 #include <stdlib.h>
 
 // function declarations
-int length();
-void append(void);
+int length(void);
 void display(void);
+void append(void);
+void add_after(void);
 void insertion_beginning(void);
+void deletion(void);
 
 // NOde structure definition
 struct node
 {
     int data;
-    struct node *link;
+    struct node *next;
 };
 
 // default Head will be NULL
@@ -51,7 +53,7 @@ int main()
             append();
             break;
         case 2:
-            printf("Session Ended!");
+            deletion();
             break;
         case 3:
             insertion_beginning();
@@ -60,7 +62,7 @@ int main()
             printf("Session Ended!");
             break;
         case 5:
-            printf("Session Ended!");
+            add_after();
             break;
         case 6:
             printf("Session Ended!");
@@ -88,17 +90,27 @@ void append(){
 
     if(head == NULL){
         head = temp;
-        temp->link = head;
+        temp->next = head;
     }
     else{
         struct node *p;
         p = head;
-        while(p->link != head){
-            p = p->link;
+        while(p->next != head){
+            p = p->next;
         }
-        p->link = temp;
-        temp->link = head;
+        p->next = temp;
+        temp->next = head;
     }
+}
+
+void deletion(){
+    struct node *temp = head->next;
+    while(temp->next != head){
+        temp = temp->next;
+    }
+    temp->next = head->next;
+    free(head);
+    head = temp;
 }
 
 void insertion_beginning()
@@ -111,19 +123,45 @@ void insertion_beginning()
 
     if(head == NULL){
         temp = head;
-        temp->link = head;
+        temp->next = head;
     }
     else{
         struct node *p;
         p = head;
-        while(p->link != head){
-            p = p->link;
+        while(p->next != head){
+            p = p->next;
         }
-        temp->link = head;
+        temp->next = head;
         head = temp;
-        p->link = head;
+        p->next = head;
     }
     printf("==========\n");
+}
+
+void add_after(){
+    struct node *temp, *p;
+    int location, i= 1;
+    int len = length();
+    printf("Enter Location: ");
+    scanf("%d", &location);
+
+    if(location > len){
+        printf("Location is out of bounds");
+    }
+    else{
+        p = head;
+        while(i < location){
+            p = p->next;
+            i++;
+        }
+        temp = (struct node *)malloc(sizeof(struct node));
+        printf("Enter data: ");
+        scanf("%d", &temp->data);
+        temp->next = NULL;
+        temp->next = p->next;
+        p->next = temp;
+    }
+
 }
 
 void display(){
@@ -135,9 +173,9 @@ void display(){
     }
     else{
         printf("================\n");
-        while (temp->link != head){
+        while (temp->next != head){
             printf("Element at pos %d is %d\n",a, temp->data);
-            temp = temp->link;
+            temp = temp->next;
             a++;
         }
         printf("Element at pos %d is %d\n", a, temp->data);
@@ -151,7 +189,8 @@ int length(){
     int a = 0;
     do{
         a++;
-        temp = temp->link;
+        temp = temp->next;
     }while(temp != head);
     printf("Length of Circular Linked list is %d\n", a);
+    return a;
 }

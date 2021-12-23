@@ -1,0 +1,187 @@
+//code for circular linked list
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node
+{
+    int data;
+    struct node *next;
+};
+
+struct node *head = NULL;
+
+void append(void);
+void add_beg(void);
+void add_after(void);
+int length(void);
+void display(void);
+
+int main()
+{
+    int len;
+    int ch;
+
+    while (1)
+    {
+        printf("\nCLL operations\n");
+        printf("1.Append\n");
+        printf("2.Add_Beg\n");
+        printf("3.Add_After\n");
+        printf("4.Length\n");
+        printf("5.Display\n");
+
+        printf("Enter your choice\n");
+        scanf("%d", &ch);
+
+        switch (ch)
+        {
+        case 1:
+            append();
+            break;
+
+        case 2:
+            add_beg();
+            break;
+
+        case 3:
+            add_after();
+            break;
+
+        case 4:
+            length();
+            break;
+
+        case 5:
+            display();
+            break;
+        }
+    }
+
+    return 0;
+}
+
+void append()
+{
+    struct node *temp;
+    temp = (struct node *)malloc(sizeof(struct node));
+
+    printf("Enter data\n");
+    scanf("%d", &temp->data);
+
+    if (head == NULL)
+    {
+        head = temp;
+        temp->next = head;
+    }
+    else
+    {
+        struct node *p;
+        p = head;
+        while (p->next != head)
+        {
+            p = p->next;
+        }
+
+        p->next = temp;
+        temp->next = head;
+    }
+}
+
+void add_beg()
+{
+    struct node *temp;
+    temp = (struct node *)malloc(sizeof(struct node));
+
+    printf("Enter data\n");
+    scanf("%d", &temp->data);
+
+    if (head == NULL)
+    {
+        head = temp;
+        temp->next = head;
+    }
+    else
+    {
+        struct node *p;
+        p = head;
+        while (p->next != head)
+        {
+            p = p->next;
+        }
+        temp->next = head;
+        head = temp;
+        p->next = head;
+    }
+}
+
+void add_after()
+{
+    struct node *temp, *p;
+    int loc, i = 1;
+    int len = length();
+
+    printf("Enter location: ");
+    scanf("%d", &loc);
+
+    if (loc > len)
+    {
+        printf("Location is invalid\n");
+    }
+    else
+    {
+        p = head;
+        while (i < loc)
+        {
+            p = p->next;
+            i++;
+        }
+
+        temp = (struct node *)malloc(sizeof(struct node *));
+        printf("Enter data\n");
+        scanf("%d", &temp->data);
+        temp->next = NULL;
+        temp->next = p->next;
+        p->next = temp;
+    }
+}
+
+int length()
+{
+    struct node *temp;
+    temp = head;
+    int counter = 0;
+
+    if (temp != NULL)
+    {
+        do
+        {
+            counter++;
+            temp = temp->next;
+        } while (temp != head);
+    }
+
+    printf("Length of ll = %d\n", counter);
+    return counter;
+}
+
+void display()
+{
+    struct node *temp;
+    temp = head;
+    if (temp == NULL)
+    {
+        printf("ll empty");
+    }
+    else
+    {
+        printf("\nPrinting ll...\n");
+        while (temp->next != head)
+        {
+            printf("%d->", temp->data);
+            temp = temp->next;
+        }
+        printf("%d->", temp->data);
+        printf("\n");
+    }
+}
