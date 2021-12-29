@@ -1,4 +1,4 @@
-/* Insertion at the end of singly linked list */
+/* Insertion at the end of Doubly linked list */
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -12,7 +12,7 @@ void deletion_beginning(void);
 void insertion_pos(int pos);
 void deletion_pos(int pos);
 
-// NOde structure definition
+// Node structure definition
 struct node
 {
     int data;

@@ -64,7 +64,7 @@ int main()
             deletion_beginning();
             break;
         case 5:
-            printf("Enter a position: ");
+            printf("Enter a position after which you want to enter the element: ");
             scanf("%d", &position);
             insertion_pos(position);
             break;
