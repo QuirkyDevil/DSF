@@ -17,6 +17,7 @@ struct node
 {
     int data;
     struct node *next;
+    struct node *prev;
 };
 
 // default Head will be NULL
@@ -67,10 +68,12 @@ int main()
             printf("Enter a position: ");
             scanf("%d", &position);
             insertion_pos(position);
+            break;
         case 6:
             printf("Enter a position: ");
             scanf("%d", &position);
             deletion_pos(position);
+            break;
         case 7:
             display();
             break;
@@ -98,6 +101,8 @@ void append()
     if (head == NULL)
     {
         head = temp;
+        temp->next = NULL;
+        temp->prev = NULL;
     }
     else
     {
@@ -108,8 +113,44 @@ void append()
         {
             p = p->next;
         }
+        temp->next = p->next;
         p->next = temp;
+        temp->prev = p;
     }
+}
+
+void insertion_beginning()
+{
+    struct node *temp;
+    temp = (struct node *)malloc(sizeof(struct node));
+    printf("Enter data: ");
+    scanf("%d", &temp->data);
+
+    temp->prev = NULL;
+    temp->next = head;
+    head->prev = temp;
+    head = temp;
+}
+
+void insertion_pos(int pos)
+{
+    struct node *p = head;
+    struct node *temp, *p2;
+    temp = (struct node *)malloc(sizeof(struct node));
+    printf("Enter data: ");
+    scanf("%d", &temp->data);
+    temp->next = NULL;
+
+    while (pos != 1)
+    {
+        p = p->next;
+        pos--;
+    }
+    p2 = p->next;
+    p->next = temp;
+    p2->prev = temp;
+    temp->next = p2;
+    temp->prev = p;
 }
 
 void deletion()
@@ -121,28 +162,15 @@ void deletion()
     else
     {
         struct node *temp = head;
-        struct node *p = head;
+        struct node *p;
         while (temp->next != NULL)
         {
-            p = temp;
             temp = temp->next;
         }
+        p = temp->prev;
         p->next = NULL;
         free(temp);
-        temp = NULL; // NO need tho
     }
-}
-
-void insertion_beginning()
-{
-    struct node *temp;
-    temp = (struct node *)malloc(sizeof(struct node));
-    printf("Enter data: ");
-    scanf("%d", &temp->data);
-
-    temp->next = NULL;
-    temp->next = head;
-    head = temp;
 }
 
 void deletion_beginning()
@@ -157,25 +185,8 @@ void deletion_beginning()
         head = head->next;
         free(temp);
         temp = NULL;
+        head->prev = NULL;
     }
-}
-
-void insertion_pos(int pos)
-{
-    struct node *p = head;
-    struct node *temp;
-    temp = (struct node *)malloc(sizeof(struct node));
-    printf("Enter data: ");
-    scanf("%d", &temp->data);
-    temp->next = NULL;
-
-    while (pos != 0)
-    {
-        p = p->next;
-        pos--;
-    }
-    temp->next = p->next;
-    p->next = temp->next;
 }
 
 void deletion_pos(int pos)
@@ -190,7 +201,6 @@ void deletion_pos(int pos)
     {
         while (pos != 1)
         {
-            previous = current;
             current = current->next;
             pos--;
         }
