@@ -144,7 +144,7 @@ void insertion_pos(int pos)
     while (pos != 1)
     {
         p = p->next;
-        pos--;
+        pos--; // TODO: check if list ends
     }
     p2 = p->next;
     p->next = temp;
