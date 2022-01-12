@@ -191,6 +191,7 @@ void deletion_beginning()
 
 void deletion_pos(int pos)
 {
+    int position;
     struct node *current = head;
     struct node *previous = head;
     if (head == NULL)
@@ -203,6 +204,12 @@ void deletion_pos(int pos)
         {
             current = current->next;
             pos--;
+            if (current == NULL){
+                printf("Invalid Position! Try again:\n");
+                scanf("%d", &position);
+                deletion_pos(position);
+
+            }
         }
         previous->next = current->next;
         free(current);
