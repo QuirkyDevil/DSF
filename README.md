@@ -1,15 +1,12 @@
-# DSF
+![header](https://capsule-render.vercel.app/api?type=rect&color=auto&text=Data%20structure%20in%20Python&fontSize=30)
 
-
----------------
-> Data structure stuff in C
----------------
-
-> some Algorithms and sorting in Arrays 
-> Stacks and Queue
-> All Linked List Opertions (Singly, Doubly and Circular)
-
----------------
-TO-DO
----------------
-> Some basic algorithms and Programs
+---
+### TO-DO:
+- [ ] Documentation
+- [ ] Arrays
+- [ ] Linked List
+- [ ] Trees
+- [ ] Nodes
+- [ ] Algorithms
+- [ ] Re-Write in Python
+---
