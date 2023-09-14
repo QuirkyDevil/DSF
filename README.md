@@ -1,4 +1,4 @@
-![header](https://capsule-render.vercel.app/api?type=rect&color=auto&text=Data%20structure%20in%20Python&fontSize=30)
+![header](https://capsule-render.vercel.app/api?type=rect&color=auto&text=Data%20structure%20in%20C&fontSize=30)
 
 ---
 ### TO-DO:
